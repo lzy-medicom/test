@@ -34,6 +34,7 @@ namespace CreateThread
             // Thread t = new Thread ( () => ThreadFuncWithParameter("y") ); t.Start();
             Thread printMsgThread = new Thread(ThreadFuncWithParameter);
             printMsgThread.Start("y");
+            
             ThreadFuncWithParameter("x");
             Console.WriteLine("\nPrint Message Thread:IsBackground={0}, Priority={1}",
                 printMsgThread.IsBackground ? "true" : "false", printMsgThread.Priority);

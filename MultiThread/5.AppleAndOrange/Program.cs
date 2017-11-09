@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading;
 using medicom;
 
+// 例子来源于以下的文章《利用多核多线程进行程序优化》
+// https://www.ibm.com/developerworks/cn/linux/l-cn-optimization/
 namespace _5.AppleAndOrange
 {
     class Program
@@ -40,7 +42,6 @@ namespace _5.AppleAndOrange
         {
             CodeTimer.Initialize();
 
-            //
             ThreadingPerformanceTests();
 
             Console.WriteLine("\nPress Enter to exit");
@@ -52,9 +53,9 @@ namespace _5.AppleAndOrange
         private static void ThreadingPerformanceTests()
         {
             TestName();
-            const Int32 iterations = 1;
-            //
-            //TestName("单线程");
+            const int sleepMs = 1000;
+            const int iterations = 1;
+            
             CodeTimer.Time("单线程", iterations,
                () =>
                {
@@ -75,6 +76,7 @@ namespace _5.AppleAndOrange
                    }
                    //Console.WriteLine("apple.a={0}, sum={1}", apple.a, sum);
                });
+            Thread.Sleep(sleepMs);
 
             CodeTimer.Time("两线程", iterations,
                () =>
@@ -103,6 +105,7 @@ namespace _5.AppleAndOrange
                    t.Join();
                    //Console.WriteLine("apple.a={0}, sum={1}", apple.a, sum);
                });
+            Thread.Sleep(sleepMs);
 
             CodeTimer.Time("三线程,加锁", iterations,
                () =>
@@ -149,6 +152,7 @@ namespace _5.AppleAndOrange
                    tb.Join();
                    //Console.WriteLine("apple.a={0}, sum={1}", apple.a, sum);
                });
+            Thread.Sleep(sleepMs);
 
             CodeTimer.Time("三线程,不加锁", iterations,
                () =>
@@ -188,6 +192,7 @@ namespace _5.AppleAndOrange
                    tb.Join();
                    //Console.WriteLine("apple.a={0}, sum={1}", apple.a, sum);
                });
+            Thread.Sleep(sleepMs);
 
             CodeTimer.Time("三线程,不加锁,Cache:32", iterations,
                () =>
@@ -227,6 +232,7 @@ namespace _5.AppleAndOrange
                    tb.Join();
                    //Console.WriteLine("apple.a={0}, sum={1}", apple.a, sum);
                });
+            Thread.Sleep(sleepMs);
 
             CodeTimer.Time("三线程,不加锁,Cache:64", iterations,
                () =>
@@ -266,6 +272,7 @@ namespace _5.AppleAndOrange
                    tb.Join();
                    //Console.WriteLine("apple.a={0}, sum={1}", apple.a, sum);
                });
+            Thread.Sleep(sleepMs);
 
             CodeTimer.Time("三线程,不加锁,Cache:128", iterations,
                () =>

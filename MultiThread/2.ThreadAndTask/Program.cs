@@ -56,8 +56,6 @@ namespace ThreadAndTask
                     Console.WriteLine("-------------------Parallel.For {0} end.", i);
                 });
             });
-
-    ;
 #else            
 
             #region CLR线程池的工作者线程
